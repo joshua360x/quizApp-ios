@@ -16,9 +16,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var trueButton: UIButton!
     
     let quiz = [
-    ["4 + 2 = 7", "False"],
-    ["pizza is good", "False"],
-        ["people are nice", "True"]
+        Question(q: "4 + 2 = 7", a: "False"),
+        Question(q: "pizza is good", a: "False"),
+        Question(q: "people are nice", a: "True")
     ]
     
     var questionNumber = 0
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
 
     @IBAction func answerButtonPressed(_ sender: UIButton) {
         let userAnswer = sender.currentTitle // going to be equal to string answer true or false
-        let actualAnswer = quiz[questionNumber][1]
+        let actualAnswer = quiz[questionNumber].answer
         
         if userAnswer == actualAnswer {
             print("Right")
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
     }
     
     func updateUI() {
-         questionLabel.text = quiz[questionNumber][0]
+        questionLabel.text = quiz[questionNumber].text
     }
     
     func restartQuiz() {
