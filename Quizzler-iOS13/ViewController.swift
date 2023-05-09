@@ -42,7 +42,7 @@ class ViewController: UIViewController {
            }
 
     @IBAction func answerButtonPressed(_ sender: UIButton) {
-        var secondsRemaining = 1
+        var secondsRemaining = 2
         let userAnswer = sender.currentTitle // going to be equal to string answer true or false
         let actualAnswer = quiz[questionNumber].answer
         
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
 
         }
         
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (Timer) in
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { (Timer) in
                if secondsRemaining > 0 {
                    print ("\(secondsRemaining) seconds")
                    secondsRemaining -= 1
@@ -66,6 +66,10 @@ class ViewController: UIViewController {
            }
         
         if questionNumber <= quiz.count - 2 {
+            let progressPercentage = Float(questionNumber) / Float(quiz.count)
+            progressBar.progress = progressPercentage
+            print(progressPercentage)
+            print("\(progressBar.progress) ---- should be the progress")
             questionNumber += 1
             
 
@@ -76,6 +80,8 @@ class ViewController: UIViewController {
             updateUI()
             
         }
+        
+
         
     }
     
