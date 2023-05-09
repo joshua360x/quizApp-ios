@@ -32,6 +32,7 @@ class ViewController: UIViewController {
     
     var questionNumber = 0
     
+    
     override func viewDidLoad() {
 
         super.viewDidLoad()
@@ -41,6 +42,7 @@ class ViewController: UIViewController {
            }
 
     @IBAction func answerButtonPressed(_ sender: UIButton) {
+        var secondsRemaining = 1
         let userAnswer = sender.currentTitle // going to be equal to string answer true or false
         let actualAnswer = quiz[questionNumber].answer
         
@@ -53,9 +55,19 @@ class ViewController: UIViewController {
 
         }
         
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (Timer) in
+               if secondsRemaining > 0 {
+                   print ("\(secondsRemaining) seconds")
+                   secondsRemaining -= 1
+               } else {
+                   Timer.invalidate()
+                self.updateUI()
+               }
+           }
+        
         if questionNumber <= quiz.count - 2 {
             questionNumber += 1
-            updateUI()
+            
 
 
         } else {
@@ -69,6 +81,8 @@ class ViewController: UIViewController {
     
     func updateUI() {
         questionLabel.text = quiz[questionNumber].text
+        trueButton.backgroundColor = UIColor.clear
+        falseButton.backgroundColor = UIColor.clear
     }
     
     func restartQuiz() {
