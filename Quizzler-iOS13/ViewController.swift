@@ -28,6 +28,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         updateUI()
+        print(quiz.count - 1)
            }
 
     @IBAction func answerButtonPressed(_ sender: UIButton) {
@@ -40,18 +41,26 @@ class ViewController: UIViewController {
             print("Wrong")
         }
         
-        if questionNumber < quiz.count {
+        if questionNumber <= quiz.count - 2 {
             questionNumber += 1
+            updateUI()
+
 
         } else {
-            print("Out of Questions")
+            print("Out of Questions, Time to restart")
+            restartQuiz()
+            updateUI()
+            
         }
         
-        updateUI()
     }
     
     func updateUI() {
          questionLabel.text = quiz[questionNumber][0]
+    }
+    
+    func restartQuiz() {
+         questionNumber = 0
     }
     
     
